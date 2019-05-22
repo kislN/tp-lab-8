@@ -9,66 +9,66 @@
 
 using namespace std;
 
-const int NPREF = 2; // количество слов в префиксе
-const int MAXGEN = 1000; //объем на выходе
-typedef deque<string> prefix;          // очередь префиксов
+const int NPREF = 2; // ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГ® Г±Г«Г®Гў Гў ГЇГ°ГҐГґГЁГЄГ±ГҐ
+const int MAXGEN = 1000; //Г®ГЎГєГҐГ¬ Г­Г  ГўГ»ГµГ®Г¤ГҐ
+typedef deque<string> prefix;          // Г®Г·ГҐГ°ГҐГ¤Гј ГЇГ°ГҐГґГЁГЄГ±Г®Гў
 
 int main() {
-	setlocale(LC_ALL, "RUS");
-	int n;
-	prefix pref;
-	vector<string> vec;
-	map<prefix, vector<string> > statetab; // префикс-суффиксы
-	string st;
-	ifstream fin("input.txt");
-	if (fin) {
-		for (int i = 0; i < NPREF; i++) {
-			fin >> st;
-			pref.push_back(st);
-		}
-		while (fin >> st) {
-			if (statetab.count(pref) == 0) {
-				vec.push_back(st);
-				statetab.insert(pair<prefix, vector<string>>(pref, vec));
-				vec.clear();
-			}
-			else {
-				statetab[pref].push_back(st);
-			}
-			pref.pop_front();
-			pref.push_back(st);
-		}
-	}
-	else {
-		cout << "File is not found" << endl;
-	}
-	fin.close();
-	pref.clear();
+  
+    int n;
+    prefix pref;
+    vector<string> vec;
+    map<prefix, vector<string> > statetab; // ГЇГ°ГҐГґГЁГЄГ±-Г±ГіГґГґГЁГЄГ±Г»
+    string st;
+    ifstream fin("input.txt");
 
-	ifstream f("input.txt");
-	for (int i = 0; i < NPREF; i++) {
-		f >> st;
-		pref.push_back(st);
-	}
-	f.close();
+    if (fin.is_open()) {
+        for (int i = 0; i < NPREF; i++) {
+            fin >> st;
+            pref.push_back(st);
+        }
+        while (fin >> st) {
+            if (statetab.count(pref) == 0) {
+                vec.push_back(st);
+                statetab.insert(pair<prefix, vector<string>>(pref, vec));
+                vec.clear();
+            }
+            else {
+                statetab[pref].push_back(st);
+            }
+            pref.pop_front();
+            pref.push_back(st);
+        }
+    }
+    else {
+        cout << "File is not found" << endl;
+    }
+    fin.close();
+    pref.clear();
 
-	ofstream out("output.txt");
-	srand(time(0));
-	out << pref[0] << " " << pref[1];
-	for (int i = 0; i < MAXGEN - 2; i++) {
-		if (statetab.count(pref)) {
-			n = rand() % statetab[pref].size();
-			out << statetab[pref][n] << " ";
-			pref.push_back(statetab[pref][n]);
-			pref.pop_front();
-		}
-		else break;
-	}
-	out.close();
+    ifstream f("input.txt");
+    for (int i = 0; i < NPREF; i++) {
+        f >> st;
+        pref.push_back(st);
+    }
+    f.close();
 
+    ofstream out("output.txt");
+    srand(time(0));
+    out << pref[0] << " " << pref[1];
+    for (int i = 0; i < MAXGEN - 2; i++) {
+        if (statetab.count(pref)) {
+            n = rand() % statetab[pref].size();
+            out << statetab[pref][n] << " ";
+            if((i + 1) % 10 == 0) out << endl;
+            pref.push_back(statetab[pref][n]);
+            pref.pop_front();
 
-	system("pause");
-	return 0;
+        }
+        else break;
+    }
+    out.close();
 
+    return 0;
 
 }

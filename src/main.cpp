@@ -20,11 +20,13 @@ int main() {
     vector<string> vec;
     map<prefix, vector<string> > statetab; // ïðåôèêñ-ñóôôèêñû
     string st;
+    vector<string> p;
     ifstream fin("input.txt");
 
     if (fin.is_open()) {
         for (int i = 0; i < NPREF; i++) {
             fin >> st;
+            p.insert(st);
             pref.push_back(st);
         }
         while (fin >> st) {
@@ -46,12 +48,9 @@ int main() {
     fin.close();
     pref.clear();
 
-    ifstream f("input.txt");
     for (int i = 0; i < NPREF; i++) {
-        f >> st;
-        pref.push_back(st);
+        pref.push_back(p[i]);
     }
-    f.close();
 
     ofstream out("output.txt");
     srand(time(0));

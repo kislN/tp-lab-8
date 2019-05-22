@@ -26,7 +26,7 @@ int main() {
     if (fin.is_open()) {
         for (int i = 0; i < NPREF; i++) {
             fin >> st;
-            p.insert(st);
+            p.push_back(st);
             pref.push_back(st);
         }
         while (fin >> st) {

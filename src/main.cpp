@@ -9,16 +9,16 @@
 
 using namespace std;
 
-const int NPREF = 2; // количество слов в префиксе
-const int MAXGEN = 1000; //объем на выходе
-typedef deque<string> prefix;          // очередь префиксов
+const int NPREF = 2; // ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГ® Г±Г«Г®Гў Гў ГЇГ°ГҐГґГЁГЄГ±ГҐ
+const int MAXGEN = 1000; //Г®ГЎГєГҐГ¬ Г­Г  ГўГ»ГµГ®Г¤ГҐ
+typedef deque<string> prefix;          // Г®Г·ГҐГ°ГҐГ¤Гј ГЇГ°ГҐГґГЁГЄГ±Г®Гў
 
 int main() {
-
+  
     int n;
     prefix pref;
     vector<string> vec;
-    map<prefix, vector<string> > statetab; // префикс-суффиксы
+    map<prefix, vector<string> > statetab; // ГЇГ°ГҐГґГЁГЄГ±-Г±ГіГґГґГЁГЄГ±Г»
     string st;
     ifstream fin("input.txt");
 
@@ -70,6 +70,5 @@ int main() {
     out.close();
 
     return 0;
-
 
 }
